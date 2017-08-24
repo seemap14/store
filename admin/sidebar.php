@@ -28,8 +28,8 @@
 					Products
 					</a>
 					<ul>
-						<li><a class="current" href="">Add Product</a></li>
-						<li><a href="#">Manage Products</a></li> <!-- Add class "current" to sub menu items also -->
+						<li><a class="current" href="#add_products">Add Product</a></li>
+						<li><a href="#products_list">Manage Products</a></li> <!-- Add class "current" to sub menu items also -->
 						<li><a href="#">Manage Comments</a></li>
 						<li><a href="#">Manage Categories</a></li>
 					</ul>

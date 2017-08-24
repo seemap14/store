@@ -22,19 +22,65 @@
 						Dashboard
 					</a>       
 				</li>
-				
+
+
+				<?php 
+				if($page=="index.php"):
+				?>
 				<li> 
-					<a href="#" class="nav-top-item current"> <!-- Add the class "current" to current menu item -->
+					<a href="" class="nav-top-item "> <!-- Add the class "current" to current menu item -->
 					Products
 					</a>
 					<ul>
-						<li><a class="current" href="#add_products">Add Product</a></li>
-						<li><a href="#products_list">Manage Products</a></li> <!-- Add class "current" to sub menu items also -->
-						<li><a href="#">Manage Comments</a></li>
-						<li><a href="#">Manage Categories</a></li>
+						<li><a  href="add.php">Add Product</a></li>
+						<li><a  href="manage.php">Manage Products</a></li> <!-- Add class "current" to sub menu items also -->
+						
 					</ul>
 				</li>
+				<?php
+				endif;
+				?>
+
+
+				<?php 
+				if($page=="add.php"):
+				?>
+				<li> 
+					<a href="" class="nav-top-item current"> <!-- Add the class "current" to current menu item -->
+					Products
+					</a>
+					<ul>
+						<li><a  href="add.php" class="current">Add Product</a></li>
+						<li><a  href="manage.php">Manage Products</a></li> <!-- Add class "current" to sub menu items also -->
+						
+					</ul>
+				</li>
+				<?php
+				endif;
+				?>
 				
+
+				<?php 
+				if($page=="manage.php"):
+				?>
+				<li> 
+					<a href="" class="nav-top-item current"> <!-- Add the class "current" to current menu item -->
+					Products
+					</a>
+					<ul>
+						<li><a  href="add.php">Add Product</a></li>
+						<li><a  href="manage.php" class="current">Manage Products</a></li> <!-- Add class "current" to sub menu items also -->
+						
+					</ul>
+				</li>
+				<?php
+				endif;
+				?>
+
+
+				<?php 
+				//if($page=="tags.php"):
+				?>
 				<li>
 					<a href="#" class="nav-top-item">
 						Tags
@@ -44,7 +90,13 @@
 						<li><a href="#">Manage Pages</a></li>
 					</ul>
 				</li>
-				
+				<?php
+				//endif;
+				?>
+
+				<?php 
+				//if($page=="categories.php"):
+				?>
 				<li>
 					<a href="#" class="nav-top-item">
 						Categories
@@ -56,7 +108,11 @@
 						<li><a href="#">Gallery Settings</a></li>
 					</ul>
 				</li>
-				
+				<?php
+				//endif;
+				?>
+
+
 				<li>
 					<a href="#" class="nav-top-item">
 						Events Calendar
@@ -67,7 +123,7 @@
 						<li><a href="#">Calendar Settings</a></li>
 					</ul>
 				</li>
-				
+			
 				<li>
 					<a href="#" class="nav-top-item">
 						Settings

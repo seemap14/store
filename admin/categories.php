@@ -1,8 +1,8 @@
-<?php include("header.php"); ?>	
-<?php
+	<?php include("header.php"); ?>	
+	<?php
       $page=basename($_SERVER['PHP_SELF']);
- ?>
-<?php include("sidebar.php"); ?>
+     ?>
+	<?php include("sidebar.php"); ?>
 		
 		<div id="main-content"> <!-- Main Content Section with everything -->
 			

@@ -1,7 +1,25 @@
 	<?php include("header.php"); ?>	
 	 <?php
-      $page=basename($_SERVER['PHP_SELF']);
-        ?>
+     $page=basename($_SERVER['PHP_SELF']);
+      $update_id=$_GET['update_id'];
+      include("config.php");
+      $products_update=array();
+
+      $stmt = $conn->prepare("SELECT id,name,price,image,category FROM products_git WHERE id=?");
+      $stmt->bind_param("i",$update_id);
+
+		$stmt->bind_result($table_id,$table_name, $table_price,$table_image,$table_cat);
+		$stmt->execute();
+		while($stmt->fetch())
+		{
+			$id=$table_id;
+			$name=$table_name;
+			$price=$table_price;
+			$image=$table_image;
+			$cat=$table_cat;
+		}
+
+      ?>
 	<?php include("sidebar.php"); ?>
 
 		
@@ -25,7 +43,7 @@
 				
 				<div class="content-box-header">
 					
-					<h3>Add Product</h3>
+					<h3>Update Product</h3>
 					
 				</div> <!-- End .content-box-header -->	
 					
@@ -33,30 +51,31 @@
 
 				<div class="tab-content default-tab" id="tab2">
 					
-						<form action="form_add_products.php" method="post" enctype="multipart/form-data">
+					
+					<form action="form_update_products.php" method="post" enctype="multipart/form-data">
 							
 							<fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
 								
 								<p>
 									<label>Product Name</label>
-										<input class="text-input small-input" name="p_name" type="text" id="small-input" />  <!-- Classes for input-notification: success, error, information, attention -->
+										<input class="text-input small-input" name="p_name" type="text" id="small-input" value="<?php echo $name ?>" />  <!-- Classes for input-notification: success, error, information, attention -->
 										<br /><small>A small description of the field</small>
 								</p>
-								
+								<input type="hidden" name="id" value="<?php echo $id?>">
 								<p>
 									<label>Product Price</label>
-								<input class="text-input small-input datepicker" name="p_price" type="text" id="medium-input"/> 
+								<input class="text-input small-input datepicker" name="p_price" type="text" id="medium-input" value="<?php echo $price ?>"/> 
 								</p>
 
 								<p>
 									<label>Product Image</label>
-								<input class="text-input small-input datepicker" name="p_image" type="file" id="medium-input" />
+								<input class="text-input small-input datepicker" name="p_image" type="file" id="medium-input" value="<?php echo $image ?>"/>
 								</p>
 								
 								<p>
 									<label>Categories</label>              
-									<select name="p_cat" class="small-input">
-										<option value="select">Select Category</option>
+									<select name="p_cat" class="small-input" ">
+										<option value="<?php echo $cat ?>"><?php echo $cat ?></option>
 										<option value="Electronics">Electronics</option>
 										<option value="Apparels">Apparels</option>
 										<option value="Sports">Sports</option>
@@ -74,12 +93,13 @@
 									<input class="button" type="submit" value="Submit" />
 								</p>
 								
+								
 							</fieldset>
 							
 							<div class="clear"></div><!-- End .clear -->
 							
 						</form>
-						
+					
 					</div> <!-- End #tab2 -->  
 					</div> <!-- End .content-box-content -->
 			

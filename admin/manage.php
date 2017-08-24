@@ -30,7 +30,13 @@
 			<p id="page-intro">What would you like to do?</p>
 			<div class="clear"></div> <!-- End .clear -->
 
-
+			<div class="content-box"><!-- Start Content Box -->
+				
+				<div class="content-box-header">
+					
+					<h3>Manage Product</h3>
+					
+				</div> <!-- End .content-box-header -->
 					
 			<div class="content-box-content" >
 
@@ -64,9 +70,9 @@
 										
 										<div class="pagination">
 											<a href="#" title="First Page">&laquo; First</a><a href="#" title="Previous Page">&laquo; Previous</a>
-											<a href="#" class="number" title="1">1</a>
+											<a href="#" class="number current" title="1">1</a>
 											<a href="#" class="number" title="2">2</a>
-											<a href="#" class="number current" title="3">3</a>
+											<a href="#" class="number" title="3">3</a>
 											<a href="#" class="number" title="4">4</a>
 											<a href="#" title="Next Page">Next &raquo;</a><a href="#" title="Last Page">Last &raquo;</a>
 										</div> <!-- End .pagination -->
@@ -86,7 +92,7 @@
 									<td><?php echo $value['cat']?></td>
 									<td>
 										<!-- Icons -->
-										 <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
+										 <a href="update.php?update_id=<?php echo $value['id']?>" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
 										 <a href="delete.php?delete_id=<?php echo $value['id']?>" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
 										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
 									</td>

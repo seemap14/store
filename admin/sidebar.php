@@ -102,8 +102,8 @@
 						Categories
 					</a>
 					<ul>
-						<li><a href="" class="">Sports</a></li>
-						<li><a href="">Apparels</a></li>
+						<li><a href="sports.php" class="">Sports</a></li>
+						<li><a href="apparels.php">Apparels</a></li>
 						<li><a href="#">Accessories</a></li>
 						<li><a href="#">Electronics</a></li>
 					</ul>
@@ -122,6 +122,25 @@
 					<ul>
 						<li><a href="sports.php" class="current">Sports</a></li>
 						<li><a href="apparels.php">Apparels</a></li>
+						<li><a href="#">Accessories</a></li>
+						<li><a href="#">Electronics</a></li>
+					</ul>
+				</li>
+				<?php
+				endif;
+				?>
+
+
+				<?php 
+				if($page=="apparels.php"):
+				?>
+				<li>
+					<a href="#" class="nav-top-item current">
+						Categories
+					</a>
+					<ul>
+						<li><a href="sports.php">Sports</a></li>
+						<li><a href="apparels.php"  class="current">Apparels</a></li>
 						<li><a href="#">Accessories</a></li>
 						<li><a href="#">Electronics</a></li>
 					</ul>

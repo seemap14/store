@@ -8,5 +8,5 @@ $stmt->bind_param("i",$delete_id);
 
 $stmt->execute();
 
-header("Location:manage.php");
+header("Location:manage.php?page_id=1");
 ?>

@@ -25,7 +25,7 @@
 
 
 				<?php 
-				if($page=="index.php"):
+				if($page=="index.php" || $page=="sports.php" || $page=="apparels.php" ):
 				?>
 				<li> 
 					<a href="" class="nav-top-item "> <!-- Add the class "current" to current menu item -->
@@ -33,7 +33,7 @@
 					</a>
 					<ul>
 						<li><a  href="add.php">Add Product</a></li>
-						<li><a  href="manage.php">Manage Products</a></li> <!-- Add class "current" to sub menu items also -->
+						<li><a  href="manage.php?page_id=1">Manage Products</a></li> <!-- Add class "current" to sub menu items also -->
 						
 					</ul>
 				</li>
@@ -51,7 +51,7 @@
 					</a>
 					<ul>
 						<li><a  href="add.php" class="current">Add Product</a></li>
-						<li><a  href="manage.php">Manage Products</a></li> <!-- Add class "current" to sub menu items also -->
+						<li><a  href="manage.php?page_id=1">Manage Products</a></li> <!-- Add class "current" to sub menu items also -->
 						
 					</ul>
 				</li>
@@ -69,7 +69,7 @@
 					</a>
 					<ul>
 						<li><a  href="add.php">Add Product</a></li>
-						<li><a  href="manage.php" class="current">Manage Products</a></li> <!-- Add class "current" to sub menu items also -->
+						<li><a  href="manage.php?page_id=1" class="current">Manage Products</a></li> <!-- Add class "current" to sub menu items also -->
 						
 					</ul>
 				</li>
@@ -95,21 +95,39 @@
 				?>
 
 				<?php 
-				//if($page=="categories.php"):
+				if($page=="index.php"  || $page=="add.php"  || $page=="manage.php" || $page=="apparels.php" ):
 				?>
 				<li>
 					<a href="#" class="nav-top-item">
 						Categories
 					</a>
 					<ul>
-						<li><a href="#">Upload Images</a></li>
-						<li><a href="#">Manage Galleries</a></li>
-						<li><a href="#">Manage Albums</a></li>
-						<li><a href="#">Gallery Settings</a></li>
+						<li><a href="" class="">Sports</a></li>
+						<li><a href="">Apparels</a></li>
+						<li><a href="#">Accessories</a></li>
+						<li><a href="#">Electronics</a></li>
 					</ul>
 				</li>
 				<?php
-				//endif;
+				endif;
+				?>
+
+				<?php 
+				if($page=="sports.php"):
+				?>
+				<li>
+					<a href="#" class="nav-top-item current">
+						Categories
+					</a>
+					<ul>
+						<li><a href="sports.php" class="current">Sports</a></li>
+						<li><a href="apparels.php">Apparels</a></li>
+						<li><a href="#">Accessories</a></li>
+						<li><a href="#">Electronics</a></li>
+					</ul>
+				</li>
+				<?php
+				endif;
 				?>
 
 

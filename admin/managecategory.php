@@ -24,14 +24,14 @@
 			{
 				header("Location:manage.php?page_id=1");
 			}*/
-
-				$stmt = $conn->prepare("SELECT id,name,pname FROM category ");
-				//$stmt->bind_param("ii",$min,$max);
-				$stmt->bind_result($table_pid, $table_name, $table_pname);
+				$c=0;
+				$stmt = $conn->prepare("SELECT id,name,pname,pid FROM category ");
+				//$stmt->bind_param("i",$c);
+				$stmt->bind_result($table_id, $table_name, $table_pname,$table_pid);
 				$stmt->execute();
 				while($stmt->fetch())
 				{
-					$category_list[]=array("id"=>$table_pid,"name"=>$table_name,"pname"=>$table_pname,"");
+					$category_list[]=array("id"=>$table_id,"name"=>$table_name,"pname"=>$table_pname,"pid"=>$table_pid);
 				}
 
 			
@@ -74,7 +74,7 @@
 								<tr>
 								   <th><input class="check-all" type="checkbox" /></th>
 								   <th>Category Name</th>
-								   <th>Parent Category</th>
+								   <th>Parent Name</th>
 								   <th>Action</th>
 								</tr>
 								
@@ -112,7 +112,7 @@
 									<td><?php echo $value['pname']?></a></td>
 									<td>
 										<!-- Icons -->
-										 <a href="" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
+										 <a href="updatecategory.php?update_id=<?php echo $value['id']?>" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
 
 										 <a href="deletecategory.php?delete_id=<?php echo $value['id']?>" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
 

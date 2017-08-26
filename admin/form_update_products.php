@@ -8,6 +8,7 @@
 		$p_price=$_POST["p_price"];
 		$p_cat=$_POST["p_cat"];
 		$p_id= $_POST["id"];
+		$page_id= $_POST["page_id"];
 		$p_comm=$_POST["textfield"];
 		$path= dirname(__FILE__);
 		$filename="";
@@ -32,5 +33,5 @@
 
 		$stmt->execute();
 
-		header("Location:manage.php");
+		header("Location:manage.php?page_id=$page_id");
 ?>

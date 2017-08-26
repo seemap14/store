@@ -2,7 +2,7 @@
 	include("config.php");
 	$p_name=$_POST["c_name"];
 	$p_cat=$_POST["p_cat"];
-	$stmt = $conn->prepare("SELECT id,pname FROM category where pname=?");
+	$stmt = $conn->prepare("SELECT id,pname FROM category where name=?");
 	$stmt->bind_param("s",$p_cat);
 	$stmt->bind_result($table_pid,$table_pname);
 	$stmt->execute();

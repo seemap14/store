@@ -1,16 +1,16 @@
 	<?php include("header.php"); ?>	
 
 	<?php
-	      $pageLink="";
+	      /*$pageLink="";
 		  $page_id=$_GET["page_id"];
 		   $max=5;
-		  $min = ($page_id-1) * $max;
+		  $min = ($page_id-1) * $max;*/
 		 
-		  $products_list=array();
+		  $category_list=array();
 		  include("config.php");
 
 		  $page=basename($_SERVER['PHP_SELF']);
-		  $stmt1=$conn->prepare("SELECT count(id) FROM products_git");
+		  /*$stmt1=$conn->prepare("SELECT count(id) FROM products_git");
 		  $stmt1->bind_result($table_rec);
 		  $stmt1->execute();
 		  while($stmt1->fetch())
@@ -23,15 +23,15 @@
 			if($page_id<1 || $page_id>$records)
 			{
 				header("Location:manage.php?page_id=1");
-			}
+			}*/
 
-				$stmt = $conn->prepare("SELECT id,name,price,image,category FROM products_git LIMIT ?,?");
-				$stmt->bind_param("ii",$min,$max);
-				$stmt->bind_result($table_id,$table_name, $table_price,$table_image,$table_cat);
+				$stmt = $conn->prepare("SELECT id,name,pname FROM category ");
+				//$stmt->bind_param("ii",$min,$max);
+				$stmt->bind_result($table_pid, $table_name, $table_pname);
 				$stmt->execute();
 				while($stmt->fetch())
 				{
-					$products_list[]=array("id"=>$table_id,"name"=>$table_name,"price"=>$table_price,"image"=>$table_image,"cat"=>$table_cat);
+					$category_list[]=array("id"=>$table_pid,"name"=>$table_name,"pname"=>$table_pname,"");
 				}
 
 			
@@ -73,10 +73,8 @@
 							<thead>
 								<tr>
 								   <th><input class="check-all" type="checkbox" /></th>
-								   <th>Product Name</th>
-								   <th>Product Price</th>
-								   <th>Product Image</th>
-								   <th>Product Category</th>
+								   <th>Category Name</th>
+								   <th>Parent Category</th>
 								   <th>Action</th>
 								</tr>
 								
@@ -97,39 +95,7 @@
 										<div class="pagination">
 										
 
-											<a href="manage.php?page_id=1" title="First Page">&laquo; First</a><?php if($page_id==1):?><a href="manage.php?page_id=<?php echo $page_id ?>" title="Previous Page">&laquo; Previous</a>
-												<?php endif;?>
-
-												<?php if($page_id!=1):?><a href="manage.php?page_id=<?php echo $page_id-1?>" title="Previous Page">&laquo; Previous</a>
-												<?php endif;?>
-
-											<?php for ($i=1; $i<=$records; $i++):
-											if($page_id==$i)
-											{
-												$pageLink.= "<a href='manage.php?page_id=".$i."' class='number current'>".$i."</a>";
-												$last=$i;
-											}
-											else
-											{
-             								$pageLink.= "<a href='manage.php?page_id=".$i."' class='number '>".$i."</a>";  
-             							     }
-											endfor;
-											echo $pageLink;	?>
-
-											<?php if($page_id==$records):?>
-
-											<a href='manage.php?page_id=<?php echo $last?>' title="Next Page">Next &raquo;</a>
-
-										    <?php endif;?>
 											
-											<?php if($page_id!=$records):?>
-
-											<a href='manage.php?page_id=<?php echo $last+1?>' title="Next Page">Next &raquo;</a>
-
-										    <?php endif;?>
-											<a href="manage.php?page_id=<?php echo $records ?>" title="Last Page">Last &raquo;</a>
-										    
-
 
 										</div> <!-- End .pagination -->
 										<div class="clear"></div>
@@ -139,20 +105,18 @@
 						 
 							<tbody>
 
-							<?php foreach($products_list as $value):?>
+							<?php foreach($category_list as $value):?>
 								<tr>
 									<td><input type="checkbox" /></td>
 									<td><?php echo $value['name'] ?></td>
-									<td><?php echo "$".$value['price']?></a></td>
-									<td><img src="../uploads/images/<?php echo $value['image']?>" height="80px" width="100px"></td>
-									<td><?php echo $value['cat']?></td>
+									<td><?php echo $value['pname']?></a></td>
 									<td>
 										<!-- Icons -->
-										 <a href="update.php?update_id=<?php echo $value['id']?>&page_id=<?php echo $page_id?>" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
+										 <a href="" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
 
-										 <a href="delete.php?delete_id=<?php echo $value['id']?>&page_id=<?php echo $page_id ?>" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
+										 <a href="deletecategory.php?delete_id=<?php echo $value['id']?>" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
 
-										 <a href="#" title="EditMeta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
+										 <a href="" title="EditMeta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
 									</td>
 								</tr>
 							<?php endforeach; ?>

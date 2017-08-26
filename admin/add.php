@@ -1,6 +1,17 @@
 	<?php include("header.php"); ?>	
+	<?php include("config.php"); ?>	
 	 <?php
       $page=basename($_SERVER['PHP_SELF']);
+      $category=array();
+				$c=0;
+				$stmt = $conn->prepare("SELECT name FROM category where pid=?");
+				$stmt->bind_param("i",$c);
+				$stmt->bind_result($table_name);
+				$stmt->execute();
+				while($stmt->fetch())
+				{
+					$category[]=array("name"=>$table_name);
+				}
         ?>
 	<?php include("sidebar.php"); ?>
 
@@ -57,10 +68,9 @@
 									<label>Categories</label>              
 									<select name="p_cat" class="small-input">
 										<option value="select">Select Category</option>
-										<option value="Electronics">Electronics</option>
-										<option value="Apparels">Apparels</option>
-										<option value="Sports">Sports</option>
-										<option value="Accessories">Accessories</option>
+										<?php foreach ($category as  $value):?>
+										<option value="<?php echo $value['name']?>"><?php echo $value['name']?></option>
+									<?php endforeach;?>
 									</select> 
 								</p>
 
@@ -86,5 +96,3 @@
 			</div> <!-- End .content-box -->      
 
 	<?php include("footer.php"); ?>
-			
-		

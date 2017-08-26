@@ -25,7 +25,7 @@
 
 
 				<?php 
-				if($page=="index.php" || $page=="sports.php" || $page=="apparels.php" ):
+				if($page=="index.php" || $page=="newcategory.php" || $page=="managecategory.php" ):
 				?>
 				<li> 
 					<a href="" class="nav-top-item "> <!-- Add the class "current" to current menu item -->
@@ -95,17 +95,16 @@
 				?>
 
 				<?php 
-				if($page=="index.php"  || $page=="add.php"  || $page=="manage.php" || $page=="apparels.php" ):
+				if($page=="index.php"  || $page=="add.php"  || $page=="manage.php" ):
 				?>
 				<li>
 					<a href="#" class="nav-top-item">
 						Categories
 					</a>
 					<ul>
-						<li><a href="sports.php" class="">Sports</a></li>
-						<li><a href="apparels.php">Apparels</a></li>
-						<li><a href="#">Accessories</a></li>
-						<li><a href="#">Electronics</a></li>
+						<li><a href="newcategory.php">Create a Category</a></li>
+						<li><a href="managecategory.php">Manage Categories</a></li>
+						
 					</ul>
 				</li>
 				<?php
@@ -113,17 +112,33 @@
 				?>
 
 				<?php 
-				if($page=="sports.php"):
+				if($page=="newcategory.php"):
 				?>
 				<li>
 					<a href="#" class="nav-top-item current">
 						Categories
 					</a>
 					<ul>
-						<li><a href="sports.php" class="current">Sports</a></li>
-						<li><a href="apparels.php">Apparels</a></li>
-						<li><a href="#">Accessories</a></li>
-						<li><a href="#">Electronics</a></li>
+						<li><a href="newcategory.php" class="current">Create a Category</a></li>
+						<li><a href="managecategory.php">Manage Categories</a></li>
+						
+					</ul>
+				</li>
+				<?php
+				endif;
+				?>
+
+				<?php 
+				if($page=="managecategory.php"):
+				?>
+				<li>
+					<a href="#" class="nav-top-item current">
+						Categories
+					</a>
+					<ul>
+						<li><a href="newcategory.php" >Create a Category</a></li>
+						<li><a href="managecategory.php" class="current">Manage Categories</a></li>
+						
 					</ul>
 				</li>
 				<?php

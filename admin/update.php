@@ -2,6 +2,7 @@
 	 <?php
      $page=basename($_SERVER['PHP_SELF']);
       $update_id=$_GET['update_id'];
+      $page_id=$_GET['page_id'];
       include("config.php");
       $products_update=array();
 
@@ -62,6 +63,7 @@
 										<br /><small>A small description of the field</small>
 								</p>
 								<input type="hidden" name="id" value="<?php echo $id?>">
+								<input type="hidden" name="page_id" value="<?php echo $page_id?>">
 								<p>
 									<label>Product Price</label>
 								<input class="text-input small-input datepicker" name="p_price" type="text" id="medium-input" value="<?php echo $price ?>"/> 

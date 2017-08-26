@@ -1,6 +1,10 @@
 	<?php include("header.php"); ?>	
 	<?php include("config.php"); ?>	
 	 <?php
+	 if(isset($_GET["not"]))
+	 {
+	 	$n=$_GET["not"];
+	 }
       $page=basename($_SERVER['PHP_SELF']);
       $category=array();
 				$c=0;
@@ -47,26 +51,43 @@
 						<form action="form_add_products.php" method="post" enctype="multipart/form-data">
 							
 							<fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+								<?php if(isset($_GET["not"])):
 								
+									if($n==0):
+								?>
+								
+									<p>
+									<span class="input-notification error png_bg" required>Error message</span>
+									</p>
+								<?php endif; endif;?>
+								<?php if(isset($_GET["not"])):
+								
+									if($n==1):
+								?>
+								
+									<p>
+									<span class="input-notification success png_bg" required>Successful message</span>
+									</p>
+								<?php endif; endif;?>
 								<p>
 									<label>Product Name</label>
-										<input class="text-input small-input" name="p_name" type="text" id="small-input" />  <!-- Classes for input-notification: success, error, information, attention -->
+										<input class="text-input small-input" name="p_name" type="text" id="small-input" required="" />  <!-- Classes for input-notification: success, error, information, attention -->
 										<br /><small>A small description of the field</small>
 								</p>
 								
 								<p>
 									<label>Product Price</label>
-								<input class="text-input small-input datepicker" name="p_price" type="text" id="medium-input"/> 
+								<input class="text-input small-input datepicker" name="p_price" type="text" id="medium-input" required="" /> 
 								</p>
 
 								<p>
 									<label>Product Image</label>
-								<input class="text-input small-input datepicker" name="p_image" type="file" id="medium-input" />
+								<input class="text-input small-input datepicker" name="p_image" type="file" id="medium-input" required="" />
 								</p>
 								
 								<p>
 									<label>Categories</label>              
-									<select name="p_cat" class="small-input">
+									<select name="p_cat" class="small-input" required="">
 										<option value="select">Select Category</option>
 										<?php foreach ($category as  $value):?>
 										<option value="<?php echo $value['name']?>"><?php echo $value['name']?></option>

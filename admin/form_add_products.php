@@ -10,7 +10,10 @@
 		$p_comm=$_POST["textfield"];
 		$path= dirname(__FILE__);
 		$filename="";
-
+		if($p_name=="" || $p_price=="" || $p_cat==""||$p_name==NULL || $p_price==NULL || $p_cat==NULL)
+		{
+			header("Location:add.php?not=0");
+		}
 		if(isset($_FILES['p_image']))
 			{
 	           if(move_uploaded_file($_FILES['p_image']['tmp_name'], "../uploads/images/".$_FILES['p_image']['name']))
@@ -29,6 +32,6 @@
 		$table_comm=$p_comm;
 
 		$stmt->execute();
-
-		header("Location:add.php");
+		
+			header("Location:add.php?not=1");
 ?>

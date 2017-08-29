@@ -127,7 +127,7 @@
 									<td><input type="checkbox" /></td>
 									<td><?php echo $value['name'] ?></td>
 									<td><?php echo "$".$value['price']?></a></td>
-									<td><img src="../uploads/images/<?php echo $value['image']?>" height="80px" width="100px"></td>
+									<td><img src="uploads/images/<?php echo $value['image']?>" height="80px" width="100px"></td>
 									<td><?php echo $value['cat']?></td>
 									<td>
 										<!-- Icons -->

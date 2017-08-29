@@ -1,6 +1,7 @@
 	<?php include("header.php"); ?>	
 	<?php include("config.php"); ?>	
 	 <?php
+	 $n=-1;
 	 if(isset($_GET["not"]))
 	 {
 	 	$n=$_GET["not"];
@@ -51,24 +52,16 @@
 						<form action="form_add_products.php" method="post" enctype="multipart/form-data">
 							
 							<fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
-								<?php if(isset($_GET["not"])):
-								
-									if($n==0):
-								?>
-								
-									<p>
-									<span class="input-notification error png_bg" required>Error message</span>
-									</p>
-								<?php endif; endif;?>
-								<?php if(isset($_GET["not"])):
-								
-									if($n==1):
-								?>
-								
+							
+									<?php if(isset($_GET["not"])):
+										if($n==1):?>
+									
 									<p>
 									<span class="input-notification success png_bg" required>Successful message</span>
 									</p>
-								<?php endif; endif;?>
+									<?php endif; 
+									endif;?>
+								
 								<p>
 									<label>Product Name</label>
 										<input class="text-input small-input" name="p_name" type="text" id="small-input" required="" />  <!-- Classes for input-notification: success, error, information, attention -->
@@ -85,6 +78,18 @@
 								<input class="text-input small-input datepicker" name="p_image" type="file" id="medium-input" required="" />
 								</p>
 								
+								<p>
+									<label>Product Tag</label>
+								<input name="q1[]" type="checkbox" value="fashion">fashion<br>
+								<input name="q1[]" type="checkbox" value="pendrive">pendrive<br>
+								<input name="q1[]" type="checkbox" value="handbag">handbag<br>
+								<input name="q1[]" type="checkbox" value="laptop">laptop<br>
+								<input name="q1[]" type="checkbox" value="shop">shop<br>
+								<input name="q1[]" type="checkbox" value="ecommerce">ecommerce<br>
+								<input name="q1[]" type="checkbox" value="headphone">headphone<br>
+								
+								</p>
+
 								<p>
 									<label>Categories</label>              
 									<select name="p_cat" class="small-input" required="">

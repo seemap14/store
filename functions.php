@@ -34,13 +34,13 @@ function getProducts($min,$max)
 {
 	global $conn;
 	$products_list=array();
-	$stmt = $conn->prepare("SELECT id,name,new_price,img,category FROM New_Product LIMIT ?,?");
+	$stmt = $conn->prepare("SELECT * FROM New_Product LIMIT ?,?");
 	$stmt->bind_param("ii",$min,$max);
-	$stmt->bind_result($table_id,$table_name, $table_price,$table_image,$table_cat);
+	$stmt->bind_result($table_id,$table_name, $table_nprice,$table_oprice,$table_image,$table_cat,$table_tag);
 	$stmt->execute();
 	while($stmt->fetch())
 	{
-		$products_list[]=array("id"=>$table_id,"name"=>$table_name,"price"=>$table_price,"image"=>$table_image,"cat"=>$table_cat);
+		$products_list[]=array("id"=>$table_id,"name"=>$table_name,"nprice"=>$table_nprice,"oprice"=>$table_oprice,"image"=>$table_image,"cat"=>$table_cat,"atg"=>$table_tag);
 	}
 	return $products_list;
 }
@@ -50,12 +50,12 @@ function getNumberOfPages()
 		global $conn;
 		$rec=0;
 	 	$stmt1=$conn->prepare("SELECT count(id) FROM New_Product");
-		  $stmt1->bind_result($table_rec);
-		  $stmt1->execute();
-		   while($stmt1->fetch())
-			{
-				$rec=$table_rec;
-			}
+		$stmt1->bind_result($table_rec);
+		$stmt1->execute();
+	   while($stmt1->fetch())
+		{
+			$rec=$table_rec;
+		}
 		return $rec;
 }
 
@@ -95,6 +95,16 @@ function insertCategory($p_name,$pid,$pname)
 	return ;
 }
 
+function insertTag($p_name)
+{
+	global $conn;
+	$stmt = $conn->prepare("INSERT INTO tags (name) VALUES (?)");
+	$stmt->bind_param("s",$cname_1);
+	$cname_1=$p_name;
+	$stmt->execute();
+	return ;
+}
+
 function delCategory($delete_id)
 {
 	global $conn;
@@ -106,6 +116,14 @@ function delCategory($delete_id)
 	$stmt1->execute();
 }
 
+function delTag($delete_id)
+{
+	global $conn;
+	$stmt = $conn->prepare("DELETE FROM tags WHERE id=?");
+	$stmt->bind_param("i",$delete_id);
+	$stmt->execute();
+}
+
 function updateCategory($c_name,$pid,$p_cat,$id1)
 {
 	global $conn;
@@ -115,6 +133,51 @@ function updateCategory($c_name,$pid,$p_cat,$id1)
 	$table_pid = $pid;
 	$table_pname=$p_cat;
 	$table_id=$id1;
+	$stmt->execute();
 	return;
+}
+
+function updateTag($c_name,$id1)
+{
+	global $conn;
+	$stmt = $conn->prepare("UPDATE tags SET name=? WHERE id=?");
+	$stmt->bind_param("si",$table_name,$table_id);
+	$table_name = $c_name;
+	$table_id=$id1;
+	$stmt->execute();
+	return;
+}
+
+function selectByCategory($c)
+{
+	global $conn;
+	$stmt1 = $conn->prepare("SELECT name,new_price,old_price,img FROM New_Product where category=?");
+    $stmt1->bind_param("s",$c);
+    $stmt1->bind_result($name,$nprice,$oprice,$img);
+    $stmt1->execute();
+    while($stmt1->fetch())
+    {
+      $product[]=array("name"=>$name,"nprice"=>$nprice,"oprice"=>$oprice,"img"=>$img);
+    } 
+    return $product;
+}
+
+function getAllTags()
+{
+	global $conn;
+	$tag_list=array();
+	$stmt = $conn->prepare("SELECT * FROM tags");
+	$stmt->bind_result($table_id, $table_name);
+	$stmt->execute();
+	while($stmt->fetch())
+	{
+		$tag_list[]=array("id"=>$table_id,"name"=>$table_name);
+	}
+	return $tag_list;
+}
+function getAllProducts()
+{
+	$query="SELECT * FROM New_Product";
+
 }
 ?>

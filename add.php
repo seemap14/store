@@ -7,6 +7,7 @@
 	 }
       $page=basename($_SERVER['PHP_SELF']);
       $category=getCategory();
+      $tag=getAllTags();
         ?>
     <?php include("header.php"); ?>	   
 	<?php include("sidebar.php"); ?>
@@ -73,14 +74,9 @@
 								
 								<p>
 									<label>Product Tag</label>
-								<input name="q1[]" type="checkbox" value="fashion">fashion<br>
-								<input name="q1[]" type="checkbox" value="pendrive">pendrive<br>
-								<input name="q1[]" type="checkbox" value="handbag">handbag<br>
-								<input name="q1[]" type="checkbox" value="laptop">laptop<br>
-								<input name="q1[]" type="checkbox" value="shop">shop<br>
-								<input name="q1[]" type="checkbox" value="ecommerce">ecommerce<br>
-								<input name="q1[]" type="checkbox" value="headphone">headphone<br>
-								
+									<?php foreach ($tag as  $value):?>
+								<input name="q1[]" type="checkbox" value="<?php echo $value['name']?>"><?php echo $value['name']?><br>
+							<?php endforeach;?>
 								</p>
 
 								<p>

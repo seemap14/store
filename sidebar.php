@@ -25,7 +25,7 @@
 
 
 				<?php 
-				if($page=="index.php" || $page=="newcategory.php" || $page=="managecategory.php" || $page=="updatecategory.php"):
+				if($page=="index.php" || $page=="newcategory.php" || $page=="managecategory.php" || $page=="updatecategory.php"|| $page=="newtag.php" || $page=="managetag.php"):
 				?>
 				<li> 
 					<a href="" class="nav-top-item "> <!-- Add the class "current" to current menu item -->
@@ -79,23 +79,23 @@
 
 
 				<?php 
-				//if($page=="tags.php"):
+				if($page=="index.php" || $page=="newcategory.php" || $page=="managecategory.php" || $page=="updatecategory.php" ||$page=="add.php"||$page=="manage.php"):
 				?>
 				<li>
-					<a href="#" class="nav-top-item">
+					<a href="" class="nav-top-item">
 						Tags
 					</a>
 					<ul>
-						<li><a href="#">Create a new Page</a></li>
-						<li><a href="#">Manage Pages</a></li>
+						<li><a href="newtag.php">Create a new tag</a></li>
+						<li><a href="managetag.php">Manage tags</a></li>
 					</ul>
 				</li>
 				<?php
-				//endif;
+				endif;
 				?>
 
 				<?php 
-				if($page=="index.php"  || $page=="add.php"  || $page=="manage.php" ||$page=="updatecategory.php" ):
+				if($page=="index.php"  || $page=="add.php"  || $page=="manage.php" ||$page=="updatecategory.php" || $page=="newtag.php" || $page=="managetag.php"):
 				?>
 				<li>
 					<a href="#" class="nav-top-item">
@@ -110,6 +110,42 @@
 				<?php
 				endif;
 				?>
+
+				<?php 
+				if($page=="newtag.php"):
+				?>
+				<li>
+					<a href="" class="nav-top-item current">
+				Tags
+					</a>
+					<ul>
+						<li><a href="newtag.php" class="current">Create a New tag</a></li>
+						<li><a href="managetag.php">Manage Tags</a></li>
+						
+					</ul>
+				</li>
+				<?php
+				endif;
+				?>
+
+				<?php 
+				if($page=="managetag.php" ):
+				?>
+				<li>
+					<a href="" class="nav-top-item current">
+						Tags
+					</a>
+					<ul>
+						<li><a href="newtag.php">Create a New Tag</a></li>
+						<li><a href="managetag.php" class="current">Manage Tags</a></li>
+						
+					</ul>
+				</li>
+				<?php
+				endif;
+				?>
+
+
 
 				<?php 
 				if($page=="newcategory.php"):
@@ -144,27 +180,6 @@
 				<?php
 				endif;
 				?>
-
-
-				<?php 
-				if($page=="apparels.php"):
-				?>
-				<li>
-					<a href="#" class="nav-top-item current">
-						Categories
-					</a>
-					<ul>
-						<li><a href="sports.php">Sports</a></li>
-						<li><a href="apparels.php"  class="current">Apparels</a></li>
-						<li><a href="#">Accessories</a></li>
-						<li><a href="#">Electronics</a></li>
-					</ul>
-				</li>
-				<?php
-				endif;
-				?>
-
-
 				<li>
 					<a href="#" class="nav-top-item">
 						Events Calendar

@@ -1,4 +1,8 @@
-<?php include("config.php");?>
+<?php 
+session_start();
+include("config.php");
+?>
+
 <?php
 function getCategory()
 {
@@ -175,9 +179,88 @@ function getAllTags()
 	}
 	return $tag_list;
 }
-function getAllProducts()
+function getAllProducts($upper,$lower,$data=array(),$min,$max)
 {
-	$query="SELECT * FROM New_Product";
+		global $conn;
+		$sql="SELECT * FROM New_Product ";
+        $sql.="WHERE new_price >=".$lower." AND new_price <=".$upper;
 
+          if(!empty($data)):
+            $sql.=" AND category IN(";
+            foreach ($data as $key => $value1):
+            foreach ($value1 as $key1 => $value):
+                $cat[]="'".$value."'";
+            endforeach;
+            endforeach;
+                $cat1=implode(',',$cat);
+                $sql.=$cat1.") ";
+          endif;
+          $sql.=" limit ".$min.",".$max;
+          $result=$conn->query($sql);
+          if ($result->num_rows > 0)
+            {
+                while($row = $result->fetch_assoc()) 
+                {
+                     $products[]=array("id"=>$row["id"],"name"=>$row["name"],"nprice"=>$row["new_price"],"oprice"=>$row["old_price"],"img"=>$row["img"]);
+                }
+            }
+		
+        return $products;
 }
+function getRecordsForFilters($upper,$lower,$data=array())
+{
+	 global $conn;
+	 $sql1="SELECT count(id) as total from New_Product " ;
+	 $sql1.="WHERE new_price >=".$lower." AND new_price <=".$upper; 
+
+	 if(!empty($data)):
+	 $sql1.=" AND category IN(";
+	 foreach ($data as $key => $value1):
+     foreach ($value1 as $key1 => $value):
+        $cat[]="'".$value."'";
+     endforeach;
+     endforeach;
+     $cat1=implode(',',$cat);
+	 $sql1.=$cat1.") ";
+	 endif;
+	 $stmt1=$conn->query($sql1);
+     if ($stmt1->num_rows > 0)
+     {
+        while($row=$stmt1->fetch_assoc())
+        {
+          $rec=$row["total"];
+        }
+     }
+     return $rec;
+}
+function getProductById($id)
+{
+	global $conn;
+	$products_list=array();
+	$stmt = $conn->prepare("SELECT * FROM New_Product WHERE id=?");
+	$stmt->bind_param("i",$id);
+	$stmt->bind_result($table_id,$table_name, $table_nprice,$table_oprice,$table_image,$table_cat,$table_tag);
+	$stmt->execute();
+	while($stmt->fetch())
+	{
+		$products_list[]=array("id"=>$table_id,"name"=>$table_name,"nprice"=>$table_nprice,"oprice"=>$table_oprice,"image"=>$table_image,"cat"=>$table_cat,"atg"=>$table_tag);
+	}
+	return $products_list;
+}
+
+function productExists($id)
+	{
+			if(isset($_SESSION['cart']))
+			{
+				$cart=$_SESSION['cart'];
+				foreach ($cart as $key =>$value) 
+				{
+					if($value['id']==$id)
+					{
+						return true;
+						break;
+					}
+				}
+			}
+	}
 ?>

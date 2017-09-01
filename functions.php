@@ -1,5 +1,4 @@
 <?php 
-session_start();
 include("config.php");
 ?>
 
@@ -155,13 +154,13 @@ function updateTag($c_name,$id1)
 function selectByCategory($c)
 {
 	global $conn;
-	$stmt1 = $conn->prepare("SELECT name,new_price,old_price,img FROM New_Product where category=?");
+	$stmt1 = $conn->prepare("SELECT id,name,new_price,old_price,img FROM New_Product where category=?");
     $stmt1->bind_param("s",$c);
-    $stmt1->bind_result($name,$nprice,$oprice,$img);
+    $stmt1->bind_result($id,$name,$nprice,$oprice,$img);
     $stmt1->execute();
     while($stmt1->fetch())
     {
-      $product[]=array("name"=>$name,"nprice"=>$nprice,"oprice"=>$oprice,"img"=>$img);
+      $product[]=array("id"=>$id,"name"=>$name,"nprice"=>$nprice,"oprice"=>$oprice,"img"=>$img);
     } 
     return $product;
 }
@@ -243,8 +242,9 @@ function getProductById($id)
 	$stmt->execute();
 	while($stmt->fetch())
 	{
-		$products_list[]=array("id"=>$table_id,"name"=>$table_name,"nprice"=>$table_nprice,"oprice"=>$table_oprice,"image"=>$table_image,"cat"=>$table_cat,"atg"=>$table_tag);
+		$products_list[]=array("id"=>$table_id,"name"=>$table_name,"nprice"=>$table_nprice,"oprice"=>$table_oprice,"image"=>$table_image,"cat"=>$table_cat,"tag"=>$table_tag,"qty"=>1);
 	}
+	$_SESSION["total_amount"]+=$products_list[0]["nprice"];
 	return $products_list;
 }
 
@@ -253,14 +253,132 @@ function productExists($id)
 			if(isset($_SESSION['cart']))
 			{
 				$cart=$_SESSION['cart'];
-				foreach ($cart as $key =>$value) 
+				foreach ($cart as $key1 =>$value1) 
 				{
-					if($value['id']==$id)
+					foreach ($value1 as $key2 => $value2)
+					{	
+						if($value2['id']==$id)
+						{
+							return true;
+							break;
+						}	
+					}
+				}
+			}
+			return false;
+	}
+
+function updateQty($id)
+{
+	if(isset($_SESSION['cart']))
+		{
+		    $cart=$_SESSION['cart'];
+
+			foreach ($cart as $key1 =>$value1) 
+			{
+				foreach ($value1 as $key2 => $value2) 
+				{
+					if($value2['id']==$id)
 					{
-						return true;
+						$cart[$key1][$key2]['qty']+=1;
+						return $cart;
 						break;
 					}
 				}
 			}
+		}
+}
+
+
+function delete_from_cart($id)
+	{
+		if(isset($_SESSION['cart']))
+		{
+			$cart=$_SESSION['cart'];
+
+			foreach ($cart as $key =>$value) 
+			{
+				foreach ($value as $key1 => $value1)
+				{				
+					if($value1['id']==$id)
+					{
+						$diff=$value1['qty'];
+						//echo $diff;
+						//die;
+						$diff_price=$diff*$value1['nprice'];
+						$_SESSION['total_qty']-=1;
+						$_SESSION["total_amount"]-=$diff_price;
+						unset($cart[$key]);
+						array_values($cart);
+						return $cart;
+					}
+				}
+			}
+		}
+	}
+
+	function register($mail,$pass)
+	{
+		global $conn;
+		$stmt = $conn->prepare("INSERT INTO frontend_user (email,password) VALUES (?,?)");
+		$stmt->bind_param("ss",$table_mail,$table_pass);
+		$table_mail=$mail;
+		$table_pass=$pass;
+		$stmt->execute();
+		return true;
+	}
+	function login($mail,$pass)
+	{
+		global $conn;
+		$stmt=$conn->prepare("SELECT email,password FROM frontend_user");
+		$stmt->bind_result($table_mail,$table_pass);
+		$stmt->execute();
+		while($stmt->fetch())
+		{
+			if($mail==$table_mail)
+			{
+				if($pass==$table_pass)
+				{
+					return true;
+				}
+			}
+			else
+			{
+				return false;
+			}
+		}
+	}
+
+	function update_new_qty($id,$new_qty)
+	{
+		if(isset($_SESSION['cart']))
+		{
+			$cart=$_SESSION['cart'];
+			
+			foreach ($cart as $key =>$value) 
+			{
+				foreach ($value as $key1 => $value1) 
+				{	
+					if($value1['id']==$id && $value1['qty']>=$new_qty)
+					{
+						$diff=$value1['qty']-$new_qty;
+						$price=$diff*$value1['nprice'];
+						$_SESSION['total_amount']-=$price;
+					}
+
+					if($value1['id']==$id && $new_qty>$value1['qty'])
+					{
+						$diff=$new_qty-$value1['qty'];
+						$price=$diff*$value1['nprice'];
+						$_SESSION['total_amount']+=$price;
+					}
+					if($value1['id']==$id)
+					{
+						$cart[$key][$key1]['qty']=$new_qty;
+						return $cart;
+					}
+				}
+			}
+		}
 	}
 ?>

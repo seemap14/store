@@ -39,8 +39,8 @@
                   </div>
                  <span id="skip-value-lower" class="example-val">30</span>
                  <span id="skip-value-upper" class="example-val">100</span>
-                 <input type="text" id="skip-value-lower1" class="example-val" value="" name="lower">
-                 <input type="text" id="skip-value-upper1" class="example-val" value="" name="upper">
+                 <input type="hidden" id="skip-value-lower1" class="example-val" value="" name="lower">
+                 <input type="hidden" id="skip-value-upper1" class="example-val" value="" name="upper">
                  <button class="aa-filter-btn" type="submit">Filter</button>
                </form>
               </div>              

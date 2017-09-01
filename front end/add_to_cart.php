@@ -1,14 +1,80 @@
 <?php
 session_start();
 include("../functions.php");
-$id=$_GET["id"];
-$product=getProductById($id);
-$cart=array();
-if(isset($_SESSION["cart"]))
+
+if(isset($_GET["id"])):
+	$id=$_GET["id"];
+    $page_id=$_GET["page_id"];
+    $page_id_filter=isset($_GET["page_id_filter"])?$_GET["page_id_filter"]:0;
+	$product=getProductById($id);
+	//print_r($product);
+	//die();
+	$cart=array();
+	if(isset($_SESSION["cart"]))
+	{
+		$cart=$_SESSION["cart"];
+	}
+	if(productExists($id))
+	{
+		$updated=updateQty($id);
+		$cart=$updated; 
+	}
+	else
+	{
+		$cart[]=$product;
+		$_SESSION["total_qty"]+=1;
+	}
+	$_SESSION["cart"]=$cart;
+	if($page_id>=1)
+	{
+	header("Location:product1.php?page_id=".$page_id);
+	}
+	elseif($page_id_filter>=1){
+		header("Location:select_by_filter.php?".$page_id_filter);
+	}
+	elseif($page_id==-1){
+		header("Location:index.php");
+	}
+	
+endif;
+
+if(isset($_GET["del_id"]))
 {
-	$cart=$_SESSION["cart"];
+	$del_id=$_GET["del_id"];
+	$page_id=$_GET["page_id"];
+	//echo $page_id;
+	//die();
+	$deleted=delete_from_cart($del_id);
+    $_SESSION["cart"]=$deleted;
+    if($page_id==1)
+    {
+    	header("Location:my_cart.php");
+    }
+    if($page_id==0)
+    {
+    	header("Location:product1.php");
+    }
 }
-$cart[]=$product;
-$_SESSION["cart"]=$cart;
-print_r($_SESSION["cart"]);
+
+if(isset($_POST["update"]))
+{
+	$new_qty=array();
+	$up_id=array();
+	$new_qty=isset($_POST["new_qty"])?$_POST["new_qty"]:array();
+	$up_id=isset($_POST["id"])?$_POST["id"]:array();
+	//echo "<pre>";
+	//print_r($new_qty);
+	//echo "<br>";
+	//print_r($up_id);
+	//echo "</pre>";
+	$i=0;
+    foreach ($new_qty as $value1):
+	$new=update_new_qty($up_id[$i],$value1);
+	$i++;
+  	$_SESSION["cart"]=$new;
+  	endforeach;
+  	header("Location:my_cart.php");
+
+
+}
 ?>

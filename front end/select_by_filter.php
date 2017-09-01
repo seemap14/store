@@ -43,41 +43,6 @@
         header("Location:select_by_filter.php?page_id=1");
        }
 
-
-        /*if(isset($_POST["category"]) || isset($_GET["cat_new"])):
-          
-          foreach ($data as $key => $value1):
-            foreach ($value1 as $key1 => $value):
-          $query1="WHERE category IN(";
-          $cat[]="'".$value."'";
-          endforeach;
-          endforeach;
-          $cat1=implode(',',$cat);
-          $sql.=$query1;
-          $sql.=$cat1.") ";
-          $sql.="limit ".$min.",".$max;
-          $result=$conn->query($sql);
-            if ($result->num_rows > 0)
-            {
-                while($row = $result->fetch_assoc()) 
-                {
-                     $products[]=array("id"=>$row["id"],"name"=>$row["name"],"nprice"=>$row["new_price"],"oprice"=>$row["old_price"],"img"=>$row["img"]);
-                }
-            }
-
-            $stmt1=$conn->query("SELECT count(id) as total from New_Product where category IN (".$cat1.")");
-            //print_r($stmt1);
-            if ($stmt1->num_rows > 0)
-            {
-                while($row=$stmt1->fetch_assoc())
-                {
-                  $rec=$row["total"];
-                }
-            }
-        
-        $records=ceil($rec/$max);
-       endif; */
-       //die();
 ?>
 <?php include("header.php");?>
   <!-- catg header banner section -->
@@ -135,7 +100,7 @@
                 <li>
                   <figure>
                     <a class="aa-product-img" href=""><img src="img/products/<?php echo $value['img']?>" alt="polo shirt img" height="300px" width="220px"></a>
-                    <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
+                    <a class="aa-add-card-btn" href="add_to_cart.php?id=<?php echo $value["id"]?>&page_id_filter=<?php echo $page_id?>""><span class="fa fa-shopping-cart"></span>Add To Cart</a>
                     <figcaption>
                       <h4 class="aa-product-title"><a href="#"><?php echo $value['name']?></a></h4>
                       <span class="aa-product-price"><?php echo "$".$value['nprice']?></span><span class="aa-product-price"><del><?php echo "$".$value['oprice']?></del></span>
@@ -243,16 +208,19 @@
                 <ul class="pagination">
 
                   <li>
-                    <a href="#" aria-label="Previous">
+                    <a href="" aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span>
                     </a>
                   </li>
                   <?php
                    if(isset($_POST["category"]) || isset($_GET["cat_new"])){
                   for ($i=1; $i<=$records; $i++):
-                    
-                        $pageLink.= "<li><a class='active-color' href='select_by_filter.php?page_id=".$i."&". http_build_query($data)."&lower=".$lower."&upper=".$upper."'>$i</a></li>";
-                    
+                    if($i==$page_id){
+                        $pageLink.= "<li class='active'><a href='select_by_filter.php?page_id=".$i."&". http_build_query($data)."&lower=".$lower."&upper=".$upper."'>$i</a></li>";
+                    }
+                    else{
+                      $pageLink.= "<li><a href='select_by_filter.php?page_id=".$i."&". http_build_query($data)."&lower=".$lower."&upper=".$upper."'>$i</a></li>";
+                    }
                   endfor;
                   echo $pageLink; 
                   }
@@ -260,18 +228,23 @@
                       {
               
                     for ($i=1; $i<=$records; $i++):
-                    
-                        $pageLink.= "<li><a href='select_by_filter.php?page_id=".$i."&lower=".$lower."&upper=".$upper."'>$i</a></li>";
-                    
+                      if($i==$page_id){
+                        $pageLink.= "<li class='active'><a href='select_by_filter.php?page_id=".$i."&lower=".$lower."&upper=".$upper."'>$i</a></li>";
+                      }
+                    else{
+                      $pageLink.= "<li><a href='select_by_filter.php?page_id=".$i."&lower=".$lower."&upper=".$upper."'>$i</a></li>";
+                    }
                   endfor;
                   echo $pageLink; 
                     }         
                   ?>
+                
                   <li>
-                    <a href="#" aria-label="Next">
+                    <a href="" aria-label="Next">
                       <span aria-hidden="true">&raquo;</span>
                     </a>
                   </li>
+                
                 </ul>
               </nav>
             </div>

@@ -207,7 +207,7 @@
                         <li>
                           <figure>
                             <a class="aa-product-img" href="#"><img src="../uploads/images/<?php echo $value['img']?>" height="280px" width="200px" alt="polo shirt img"></a>
-                            <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
+                            <a class="aa-add-card-btn" href="add_to_cart.php?id=<?php echo $value['id']?>&page_id=-1"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
                               <figcaption>
                               <h4 class="aa-product-title"><a href="#"><?php echo $value['name']?></a></h4>
                               <span class="aa-product-price"><?php echo "$".$value['nprice']?></span><span class="aa-product-price"><del><?php echo "$".$value['oprice']?></del></span>
@@ -236,7 +236,7 @@
                         <li>
                           <figure>
                             <a class="aa-product-img" href="#"><img src="img/products/<?php echo $value['img']?>" alt="polo shirt img" height="280px" width="200px"></a>
-                            <a class="aa-add-card-btn" href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
+                            <a class="aa-add-card-btn" href="add_to_cart.php?id=<?php echo $value['id']?>&page_id=-1"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
                             <figcaption>
                               <h4 class="aa-product-title"><a href="#"><?php echo $value['name']?></a></h4>
                               <span class="aa-product-price"><?php echo "$".$value['nprice']?></span><span class="aa-product-price"><del><?php echo "$".$value['oprice']?></del></span>
@@ -265,7 +265,7 @@
                         <li>
                           <figure>
                             <a class="aa-product-img" href="#"><img src="img/products/<?php echo $value['img']?>" alt="<?php echo $value['name']?>" height="280px" width="200px"></a>
-                            <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
+                            <a class="aa-add-card-btn"  href="add_to_cart.php?id=<?php echo $value['id']?>&page_id=-1"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
                             <figcaption>
                               <h4 class="aa-product-title"><a href="#"><?php echo $value['name']?></a></h4>
                               <span class="aa-product-price"><?php echo "$".$value['nprice']?></span><span class="aa-product-price"><del><?php echo "$".$value['oprice']?></del></span>
@@ -293,7 +293,7 @@
                         <li>
                           <figure>
                             <a class="aa-product-img" href="#"><img src="img/products/<?php echo $value['img']?>" height="280px" width="200px" alt="<?php echo $value['name']?>"></a>
-                            <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
+                            <a class="aa-add-card-btn" href="add_to_cart.php?id=<?php echo $value['id']?>&page_id=-1"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
                             <figcaption>
                               <h4 class="aa-product-title"><a href="#"><?php echo $value['name']?></a></h4>
                               <span class="aa-product-price"><?php echo "$".$value['nprice']?></span><span class="aa-product-price"><del><?php echo "$".$value['oprice']?></del></span>
@@ -320,7 +320,7 @@
                         <li>
                           <figure>
                             <a class="aa-product-img" href="#"><img src="img/products/<?php echo $value['img']?>" height="280px" width="200px" alt="<?php echo $value['name']?>"></a>
-                            <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
+                            <a class="aa-add-card-btn" href="add_to_cart.php?id=<?php echo $value['id']?>&page_id=-1"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
                             <figcaption>
                               <h4 class="aa-product-title"><a href="#"><?php echo $value['name']?></a></h4>
                               <span class="aa-product-price"><?php echo "$".$value['nprice']?></span><span class="aa-product-price"><del><?php echo "$".$value['oprice']?></del></span>

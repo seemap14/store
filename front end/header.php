@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -102,10 +105,10 @@
               <!-- / header top left -->
               <div class="aa-header-top-right">
                 <ul class="aa-head-top-nav-right">
-                  <li><a href="account.html">My Account</a></li>
-                  <li class="hidden-xs"><a href="wishlist.html">Wishlist</a></li>
-                  <li class="hidden-xs"><a href="cart.html">My Cart</a></li>
-                  <li class="hidden-xs"><a href="checkout.html">Checkout</a></li>
+                  <li><a href="account.php">My Account</a></li>
+                  <li class="hidden-xs"><a href="">Wishlist</a></li>
+                  <li class="hidden-xs"><a href="my_cart.php">My Cart</a></li>
+                  <li class="hidden-xs"><a href="checkout.php">Checkout</a></li>
                   <li><a href="" data-toggle="modal" data-target="#login-modal">Login</a></li>
                 </ul>
               </div>
@@ -138,36 +141,41 @@
                 <a class="aa-cart-link" href="#">
                   <span class="fa fa-shopping-basket"></span>
                   <span class="aa-cart-title">SHOPPING CART</span>
-                  <span class="aa-cart-notify">2</span>
+                  <span class="aa-cart-notify">
+                  <?php 
+                  if(isset($_SESSION["total_qty"]))
+                    echo $_SESSION["total_qty"]; 
+                  else echo "0";
+                  ?>
+                  </span>
                 </a>
                 <div class="aa-cartbox-summary">
                   <ul>
+                  <?php if(isset($_SESSION["cart"])):?>
+                    <?php foreach ($_SESSION["cart"] as $key => $value):?>
+                      <?php foreach ($value as $key1 => $value2):?>
                     <li>
-                      <a class="aa-cartbox-img" href="#"><img src="img/woman-small-2.jpg" alt="img"></a>
+                      <a class="aa-cartbox-img" href="../uploads/images/<?php echo $value2["image"]?>"><img src="../uploads/images/<?php echo $value2["image"]?>" alt="img" height="60px" width="60px"></a>
                       <div class="aa-cartbox-info">
-                        <h4><a href="#">Product Name</a></h4>
-                        <p>1 x $250</p>
+                        <h4><a href="#"><?php echo $value2["name"]?></a></h4>
+                        <p><?php echo $value2["qty"]?> x <?php echo "$".$value2["nprice"]?></p>
                       </div>
-                      <a class="aa-remove-product" href="#"><span class="fa fa-times"></span></a>
+                      <a class="aa-remove-product" href="add_to_cart.php?page_id=0&del_id=<?php echo $value2["id"]?>"><span class="fa fa-times"></span></a>
                     </li>
+                  <?php endforeach;?>
+                <?php endforeach;?>
+              <?php endif;?>
                     <li>
-                      <a class="aa-cartbox-img" href="#"><img src="img/woman-small-1.jpg" alt="img"></a>
-                      <div class="aa-cartbox-info">
-                        <h4><a href="#">Product Name</a></h4>
-                        <p>1 x $250</p>
-                      </div>
-                      <a class="aa-remove-product" href="#"><span class="fa fa-times"></span></a>
-                    </li>                    
-                    <li>
-                      <span class="aa-cartbox-total-title">
-                        Total
-                      </span>
-                      <span class="aa-cartbox-total-price">
-                        $500
-                      </span>
-                    </li>
+                     <span class="aa-cartbox-total-title">
+                       Total
+                     </span>
+                     <span class="aa-cartbox-total-price">
+                      <?php if(isset($_SESSION['total_amount'])){ echo "$".$_SESSION['total_amount'].".0";}
+                      else {echo "0";} ?>
+                     </span>
+                   </li>
                   </ul>
-                  <a class="aa-cartbox-checkout aa-primary-btn" href="#">Checkout</a>
+                  <a class="aa-cartbox-checkout aa-primary-btn" href="checkout.php">Checkout</a>
                 </div>
               </div>
               <!-- / cart box -->

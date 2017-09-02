@@ -1,11 +1,3 @@
-<?php
-if(isset($_SESSION["cart"]))
-{
-  $order=json_encode($_SESSION["cart"]);
-  $data = http_build_query(array('order_data' => $order));
-}
-
-?>
 <!DOCTYPE html>
 <html lang="en">
   <head>

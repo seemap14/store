@@ -391,7 +391,7 @@ function delete_from_cart($id)
 		global $conn;
 		$user=$_SESSION["user"];
 		$price=$_SESSION["total_amount"];
-		$time=date("Y/m/d");
+		$time=date("h:i:sa");
 		$stmt=$conn->prepare("INSERT INTO orders (orderTime,orderUser,orderData,orderPrice) VALUES (?,?,?,?)");
 		$stmt->bind_param("ssss",$time_table,$user_table,$data_table,$price_table);
 		$user_table=$user;
@@ -401,4 +401,33 @@ function delete_from_cart($id)
 		$stmt->execute();
 		return;
 	}
+
+	function show_order($min,$max)
+	{
+		global $conn;
+		$products_list=array();
+		$stmt = $conn->prepare("SELECT * FROM orders LIMIT ?,?");
+		$stmt->bind_param("ii",$min,$max);
+		$stmt->bind_result($table_id,$table_time, $table_user,$table_data,$table_price);
+		$stmt->execute();
+		while($stmt->fetch())
+		{
+			$products_list[]=array("id"=>$table_id,"time"=>$table_time,"price"=>$table_price,"user"=>$table_user,"data"=>$table_data);
+		}
+		return $products_list;
+	}
+
+	function getNumberOfPages_orders()
+{
+		global $conn;
+		$rec=0;
+	 	$stmt1=$conn->prepare("SELECT count(orderId) FROM orders");
+		$stmt1->bind_result($table_rec);
+		$stmt1->execute();
+	   while($stmt1->fetch())
+		{
+			$rec=$table_rec;
+		}
+		return $rec;
+}
 ?>

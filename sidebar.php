@@ -25,7 +25,7 @@
 
 
 				<?php 
-				if($page=="index.php" || $page=="newcategory.php" || $page=="managecategory.php" || $page=="updatecategory.php"|| $page=="newtag.php" || $page=="managetag.php"):
+				if($page=="index.php" || $page=="newcategory.php" || $page=="managecategory.php" || $page=="updatecategory.php" || $page=="orders.php" || $page=="newtag.php" || $page=="managetag.php"):
 				?>
 				<li> 
 					<a href="" class="nav-top-item "> <!-- Add the class "current" to current menu item -->
@@ -79,7 +79,7 @@
 
 
 				<?php 
-				if($page=="index.php" || $page=="newcategory.php" || $page=="managecategory.php" || $page=="updatecategory.php" ||$page=="add.php"||$page=="manage.php"):
+				if($page=="index.php" || $page=="newcategory.php" || $page=="managecategory.php" || $page=="updatecategory.php" ||$page=="add.php"||$page=="manage.php" || $page=="orders.php"):
 				?>
 				<li>
 					<a href="" class="nav-top-item">
@@ -95,7 +95,7 @@
 				?>
 
 				<?php 
-				if($page=="index.php"  || $page=="add.php"  || $page=="manage.php" ||$page=="updatecategory.php" || $page=="newtag.php" || $page=="managetag.php"):
+				if($page=="index.php"  || $page=="add.php"  || $page=="manage.php" ||$page=="updatecategory.php" || $page=="newtag.php" || $page=="managetag.php" || $page=="orders.php"):
 				?>
 				<li>
 					<a href="#" class="nav-top-item">
@@ -181,16 +181,29 @@
 				endif;
 				?>
 				<li>
-					<a href="#" class="nav-top-item">
-						Events Calendar
+					<a href="" class="nav-top-item">
+						Orders
 					</a>
 					<ul>
-						<li><a href="#">Calendar Overview</a></li>
-						<li><a href="#">Add a new Event</a></li>
-						<li><a href="#">Calendar Settings</a></li>
+						<li><a href="orders.php">Manage orders</a></li>
+						
 					</ul>
 				</li>
-			
+				<?php 
+				if($page=="orders.php"):
+				?>
+				<li> 
+					<a href="" class="nav-top-item current"> <!-- Add the class "current" to current menu item -->
+					Products
+					</a>
+					<ul>
+						<li><a  href="orders.php" class="current">Manage orders</a></li>
+				
+					</ul>
+				</li>
+				<?php
+				endif;
+				?>
 				<li>
 					<a href="#" class="nav-top-item">
 						Settings

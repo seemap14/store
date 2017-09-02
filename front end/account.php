@@ -1,6 +1,9 @@
 
 <?php
+session_start();
 include("../functions.php");
+$page=basename(__FILE__);
+$page=isset($_GET["page"])?$_GET["page"]:"";
 $reg=false;
 $log=true;
 if(isset($_POST["register"]))
@@ -13,10 +16,19 @@ if(isset($_POST["login"]))
 {
   $email=isset($_POST["email"])?$_POST["email"]:"";
   $pass=isset($_POST["pass"])?$_POST["pass"]:"";
-  $log=login($email,$pass);
-  if(true===$log)
-  $_SESSION["user"]=$email;
-  
+  $page=isset($_POST["page"])?$_POST["page"]:"";
+  if($log=login($email,$pass))
+  {
+    $_SESSION["user"]=$email;
+    if($page=="checkout.php")
+    {
+      header("Location:checkout.php");
+    }
+    else
+    {
+      header("Location:product1.php");
+    }
+  } 
 }
 ?>
 <?php include("header.php");?>
@@ -55,6 +67,7 @@ if(isset($_POST["login"]))
                    <input type="text" placeholder="Username or email" name="email" required="">
                    <label for="">Password<span>*</span></label>
                     <input type="password" placeholder="Password" name="pass" required="">
+                    <input type="hidden"  name="page" value="<?php echo $page?>">
                     <button type="submit" class="aa-browse-btn" name="login">Login</button>
                     <label class="rememberme" for="rememberme"><input type="checkbox" id="rememberme"> Remember me </label>
                     <p class="aa-lost-password"><a href="#">Lost your password?</a></p>

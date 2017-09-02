@@ -1,4 +1,7 @@
-<?php include("header.php");?>
+<?php
+session_start();
+$page=basename(__FILE__); 
+include("header.php");?>
  
   <!-- catg header banner section -->
   <section id="aa-catg-head-banner">
@@ -43,7 +46,7 @@
                         <?php foreach ($value as $key1 => $value2):?>
                           
                       <tr>
-                        <td><a class="remove" href="add_to_cart.php?page_id=1&del_id=<?php echo $value2["id"]?>"><fa class="fa fa-close"></fa></a></td>
+                        <td><a class="remove" href="add_to_cart.php?page_id=<?php echo $page?>&del_id=<?php echo $value2["id"]?>"><fa class="fa fa-close"></fa></a></td>
                         <td><a href="../uploads/images/<?php echo $value2["image"]?>"><img src="../uploads/images/<?php echo $value2["image"]?>" alt="img"></a></td>
                         <td><a class="aa-cart-title" href="#"><?php echo $value2["name"]?></a></td>
                         <td><?php echo "$".$value2["nprice"]?></td>
@@ -78,9 +81,9 @@
                      <td>
                      <?php 
                      if(isset($_SESSION["total_amount"]))
-                     {
-                      echo "$".$_SESSION["total_amount"].".0";
-                     }
+                       {
+                        echo "$".$_SESSION["total_amount"].".0";
+                       }
                      else
                       {
                         echo "$0.0";
@@ -90,7 +93,7 @@
                    </tr>
                  </tbody>
                </table>
-               <a href="#" class="aa-cart-view-btn">Proced to Checkout</a>
+               <a href="checkout.php" class="aa-cart-view-btn">Proced to Checkout</a>
              </div>
            </div>
          </div>

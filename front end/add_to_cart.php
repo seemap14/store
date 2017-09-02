@@ -4,8 +4,8 @@ include("../functions.php");
 
 if(isset($_GET["id"])):
 	$id=$_GET["id"];
-    $page_id=$_GET["page_id"];
-    $page_id_filter=isset($_GET["page_id_filter"])?$_GET["page_id_filter"]:0;
+    $page_id=isset($_GET["page_id"])?$_GET["page_id"]:0;
+    $page_name=isset($_GET["page_name"])?$_GET["page_name"]:"";
 	$product=getProductById($id);
 	//print_r($product);
 	//die();
@@ -25,16 +25,14 @@ if(isset($_GET["id"])):
 		$_SESSION["total_qty"]+=1;
 	}
 	$_SESSION["cart"]=$cart;
-	if($page_id>=1)
-	{
-	header("Location:product1.php?page_id=".$page_id);
-	}
-	elseif($page_id_filter>=1){
-		header("Location:select_by_filter.php?".$page_id_filter);
-	}
-	elseif($page_id==-1){
-		header("Location:index.php");
-	}
+	if($page_name=="index.php")
+    {
+    	header("Location:index.php");
+    }
+    if($page_name=="product1.php")
+    {
+    	header("Location:product1.php?page_id=".$page_id);
+    }
 	
 endif;
 
@@ -46,11 +44,19 @@ if(isset($_GET["del_id"]))
 	//die();
 	$deleted=delete_from_cart($del_id);
     $_SESSION["cart"]=$deleted;
-    if($page_id==1)
+    if($page_id=="index.php")
+    {
+    	header("Location:index.php");
+    }
+    if($page_id=="my_cart.php")
     {
     	header("Location:my_cart.php");
     }
-    if($page_id==0)
+    if($page_id=="account.php")
+    {
+    	header("Location:account.php");
+    }
+    if($page_id=="product1.php")
     {
     	header("Location:product1.php");
     }
@@ -62,11 +68,6 @@ if(isset($_POST["update"]))
 	$up_id=array();
 	$new_qty=isset($_POST["new_qty"])?$_POST["new_qty"]:array();
 	$up_id=isset($_POST["id"])?$_POST["id"]:array();
-	//echo "<pre>";
-	//print_r($new_qty);
-	//echo "<br>";
-	//print_r($up_id);
-	//echo "</pre>";
 	$i=0;
     foreach ($new_qty as $value1):
 	$new=update_new_qty($up_id[$i],$value1);

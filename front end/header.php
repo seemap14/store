@@ -1,5 +1,10 @@
-<?php 
-session_start();
+<?php
+if(isset($_SESSION["cart"]))
+{
+  $order=json_encode($_SESSION["cart"]);
+  $data = http_build_query(array('order_data' => $order));
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -107,6 +112,9 @@ session_start();
                 <ul class="aa-head-top-nav-right">
                   <li><a href="account.php">My Account</a></li>
                   <li class="hidden-xs"><a href="">Wishlist</a></li>
+                  <?php if(isset($_SESSION["user"])):?>
+                  <li class="hidden-xs"><a href=""><?php echo $_SESSION["user"]?></a></li>
+                <?php endif;?>
                   <li class="hidden-xs"><a href="my_cart.php">My Cart</a></li>
                   <li class="hidden-xs"><a href="checkout.php">Checkout</a></li>
                   <li><a href="" data-toggle="modal" data-target="#login-modal">Login</a></li>
@@ -160,7 +168,7 @@ session_start();
                         <h4><a href="#"><?php echo $value2["name"]?></a></h4>
                         <p><?php echo $value2["qty"]?> x <?php echo "$".$value2["nprice"]?></p>
                       </div>
-                      <a class="aa-remove-product" href="add_to_cart.php?page_id=0&del_id=<?php echo $value2["id"]?>"><span class="fa fa-times"></span></a>
+                      <a class="aa-remove-product" href="add_to_cart.php?page_id=<?php echo $page?>&del_id=<?php echo $value2["id"]?>"><span class="fa fa-times"></span></a>
                     </li>
                   <?php endforeach;?>
                 <?php endforeach;?>
@@ -171,7 +179,7 @@ session_start();
                      </span>
                      <span class="aa-cartbox-total-price">
                       <?php if(isset($_SESSION['total_amount'])){ echo "$".$_SESSION['total_amount'].".0";}
-                      else {echo "0";} ?>
+                      else {echo "$0.0";} ?>
                      </span>
                    </li>
                   </ul>

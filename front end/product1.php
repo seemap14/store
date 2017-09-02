@@ -1,5 +1,7 @@
 <?php 
     include("../functions.php");
+    session_start();
+    $page=basename(__FILE__);
     $pageLink="";
     $page_id=isset($_GET["page_id"])?$_GET["page_id"]:1;
     $max=9;
@@ -82,7 +84,7 @@
                 <li>
                   <figure>
                     <a class="aa-product-img" href=""><img src="../uploads/images/<?php echo $value['image']?>" alt="polo shirt img" height="300px" width="220px"></a>
-                    <a class="aa-add-card-btn" href="add_to_cart.php?id=<?php echo $value['id']?>&page_id=<?php echo $page_id?>"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
+                    <a class="aa-add-card-btn" href="add_to_cart.php?id=<?php echo $value['id']?>&page_name=<?php echo $page?>&page_id=<?php echo $page_id?>"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
                     <figcaption>
                       <h4 class="aa-product-title"><a href="#"><?php echo $value['name']?></a></h4>
                       <span class="aa-product-price"><?php echo "$".$value['nprice']?></span><span class="aa-product-price"><del></del></span>

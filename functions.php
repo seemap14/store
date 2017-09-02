@@ -341,6 +341,10 @@ function delete_from_cart($id)
 				{
 					return true;
 				}
+				else
+				{
+					return false;
+				}
 			}
 			else
 			{
@@ -380,5 +384,21 @@ function delete_from_cart($id)
 				}
 			}
 		}
+	}
+
+	function checkout($data=array())
+	{
+		global $conn;
+		$user=$_SESSION["user"];
+		$price=$_SESSION["total_amount"];
+		$time=date("Y/m/d");
+		$stmt=$conn->prepare("INSERT INTO orders (orderTime,orderUser,orderData,orderPrice) VALUES (?,?,?,?)");
+		$stmt->bind_param("ssss",$time_table,$user_table,$data_table,$price_table);
+		$user_table=$user;
+		$data_table=$data;
+		$time_table=$time;
+		$price_table=$price;
+		$stmt->execute();
+		return;
 	}
 ?>

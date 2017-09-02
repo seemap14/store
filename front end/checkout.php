@@ -1,12 +1,23 @@
 <?php 
-//if(!isset($_SESSION["user"]))
-//{
- // header("Location:account.php");
-//}
+session_start();
+include("../functions.php");
+$page=basename(__FILE__);
+if(!isset($_SESSION["user"]))
+{
+  header("Location:account.php?page=".$page);
+}
+if(isset($_SESSION["user"]))
+{
+  if(isset($_SESSION["cart"]))
+  {
+    $order=json_encode($_SESSION["cart"]);
+    checkout($order);
+  }
+
+}
 ?>
 <?php include("header.php");?>
   <!-- / menu -->  
- 
   <!-- catg header banner section -->
   <section id="aa-catg-head-banner">
     <img src="img/fashion/fashion-header-bg-8.jpg" alt="fashion img">

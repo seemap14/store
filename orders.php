@@ -130,7 +130,14 @@
 									<td><?php echo "$".$value['price']?></a></td>
 									<td> <?php foreach ($value['data'] as $key1 => $value1):
 												foreach ($value1 as $key2 => $value2):
-													print_r ($value2);
+													$array=get_object_vars($value2);
+													echo "<b>id:</b>".$array["id"]."<br>";
+														echo "<b>name:</b>".$array["name"]."<br>";
+															echo "<b>price:</b>".$array["nprice"]."<br>";
+																echo "<b>image:</b>".$array["image"]."<br>";
+																	echo "<b>category:</b>".$array["cat"]."<br>";
+																		echo "<b>tag:</b>".$array["tag"]."<br>";
+																		
 											   endforeach;
 												 endforeach;
 										?>

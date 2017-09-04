@@ -151,6 +151,3 @@
 			
 			
 	<?php include("footer.php"); ?>
-
-   
-

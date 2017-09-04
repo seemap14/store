@@ -128,7 +128,13 @@
 									<td><input type="checkbox" /></td>
 									<td><?php echo $value['user'] ?></td>
 									<td><?php echo "$".$value['price']?></a></td>
-									<td> <?php echo $value['data']?></td>
+									<td> <?php foreach ($value['data'] as $key1 => $value1):
+												foreach ($value1 as $key2 => $value2):
+													print_r ($value2);
+											   endforeach;
+												 endforeach;
+										?>
+									</td>
 									<td><?php echo $value['time']?></td>
 									
 								</tr>
@@ -145,6 +151,3 @@
 			
 			
 	<?php include("footer.php"); ?>
-
-   
-

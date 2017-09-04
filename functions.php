@@ -391,7 +391,7 @@ function delete_from_cart($id)
 		global $conn;
 		$user=$_SESSION["user"];
 		$price=$_SESSION["total_amount"];
-		$time=date("h:i:sa");
+		$time=date('Y/m/d H:i:s');
 		$stmt=$conn->prepare("INSERT INTO orders (orderTime,orderUser,orderData,orderPrice) VALUES (?,?,?,?)");
 		$stmt->bind_param("ssss",$time_table,$user_table,$data_table,$price_table);
 		$user_table=$user;
@@ -412,8 +412,10 @@ function delete_from_cart($id)
 		$stmt->execute();
 		while($stmt->fetch())
 		{
-			$products_list[]=array("id"=>$table_id,"time"=>$table_time,"price"=>$table_price,"user"=>$table_user,"data"=>$table_data);
+			$products_list[]=array("id"=>$table_id,"time"=>$table_time,"user"=>$table_user,"data"=>json_decode($table_data),"price"=>$table_price);
 		}
+		//var_dump($products_list[0]['data']);
+		//die;
 		return $products_list;
 	}
 

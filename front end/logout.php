@@ -1,0 +1,10 @@
+<?php
+session_start();
+unset($_SESSION["cart"]);
+unset($_SESSION["user"]);
+unset($_SESSION["total_amount"]);
+unset($_SESSION["total_qty"]);
+$_SESSION=[];
+session_destroy();
+header("location:index.php");
+?>

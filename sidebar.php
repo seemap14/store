@@ -94,22 +94,7 @@
 				endif;
 				?>
 
-				<?php 
-				if($page=="index.php"  || $page=="add.php"  || $page=="manage.php" ||$page=="updatecategory.php" || $page=="newtag.php" || $page=="managetag.php" || $page=="orders.php"):
-				?>
-				<li>
-					<a href="#" class="nav-top-item">
-						Categories
-					</a>
-					<ul>
-						<li><a href="newcategory.php">Create a Category</a></li>
-						<li><a href="managecategory.php">Manage Categories</a></li>
-						
-					</ul>
-				</li>
-				<?php
-				endif;
-				?>
+				
 
 				<?php 
 				if($page=="newtag.php"):
@@ -145,6 +130,22 @@
 				endif;
 				?>
 
+				<?php 
+				if($page=="index.php"  || $page=="add.php"  || $page=="manage.php" ||$page=="updatecategory.php" || $page=="newtag.php" || $page=="managetag.php" || $page=="orders.php"):
+				?>
+				<li>
+					<a href="#" class="nav-top-item">
+						Categories
+					</a>
+					<ul>
+						<li><a href="newcategory.php">Create a Category</a></li>
+						<li><a href="managecategory.php">Manage Categories</a></li>
+						
+					</ul>
+				</li>
+				<?php
+				endif;
+				?>
 
 
 				<?php 
@@ -180,7 +181,24 @@
 				<?php
 				endif;
 				?>
-				<li>
+				
+				<?php 
+				if($page=="orders.php"){
+				?>
+				<li> 
+					<a href="" class="nav-top-item current"> <!-- Add the class "current" to current menu item -->
+					Orders
+					</a>
+					<ul>
+						<li><a  href="orders.php" class="current">Manage orders</a></li>
+				
+					</ul>
+				</li>
+				<?php
+				}
+				else
+				{?>
+					<li>
 					<a href="" class="nav-top-item">
 						Orders
 					</a>
@@ -189,20 +207,7 @@
 						
 					</ul>
 				</li>
-				<?php 
-				if($page=="orders.php"):
-				?>
-				<li> 
-					<a href="" class="nav-top-item current"> <!-- Add the class "current" to current menu item -->
-					Products
-					</a>
-					<ul>
-						<li><a  href="orders.php" class="current">Manage orders</a></li>
-				
-					</ul>
-				</li>
-				<?php
-				endif;
+				<?php }
 				?>
 				<li>
 					<a href="#" class="nav-top-item">

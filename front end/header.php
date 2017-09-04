@@ -109,7 +109,12 @@
                 <?php endif;?>
                   <li class="hidden-xs"><a href="my_cart.php">My Cart</a></li>
                   <li class="hidden-xs"><a href="checkout.php">Checkout</a></li>
-                  <li><a href="" data-toggle="modal" data-target="#login-modal">Login</a></li>
+                  <?php if(!isset($_SESSION["user"])):?>
+                  <li><a href="account.php" >Login</a></li>
+                <?php endif;?>
+                <?php if(isset($_SESSION["user"])):?>
+                  <li><a href="logout.php">Logout</a></li>
+                <?php endif;?>
                 </ul>
               </div>
             </div>
@@ -327,5 +332,3 @@
     </div>
   </section>
   <!-- / menu -->  
- 
-  

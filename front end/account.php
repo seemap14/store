@@ -1,6 +1,10 @@
 
 <?php
 session_start();
+if(isset($_SESSION["user"]))
+{
+  header("Location:product1.php");
+}
 include("../functions.php");
 $page=basename(__FILE__);
 $page=isset($_GET["page"])?$_GET["page"]:"";
